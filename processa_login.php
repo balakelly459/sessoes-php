@@ -1,10 +1,21 @@
 <?php
 
+//inicializa a sessão para o processo de login
 session_start();
+//importação do arquivo
+require_once("./funcoes.php");
 
-echo session_id();
+//recebendo os dados do formulário:
+if(isset($_POST["txt_usuario"]) || isset($_POST["txt_senha"])){
 
-require("./funcoes.php");
+$usuario = $_POST["txt_usuario"];
+$senha = $_POST["txt_senha"];
 
-echo "funções"
+realizarLogin($usuario, $senha, lerArquivo("dados/usuarios.json"));
+
+}else if($_GET["logout"]){
+
+    finalizarLogin();
+}
+
 ?>
